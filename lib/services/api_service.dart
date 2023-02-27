@@ -3,10 +3,11 @@ import 'package:weathergo/models/currentWeathermodel.dart';
 import 'package:weathergo/models/hourly_weathermodel.dart';
 import 'package:weathergo/string.dart';
 import 'package:weathergo/string.dart';
-var link="https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey";
-var link2="https://api.openweathermap.org/data/2.5/forecast?lat=$latitude&lon=$longitude&appid=$apiKey";
-getCurrentWeather() async{
-  var res=await http.get(Uri.parse(link));
+
+
+getCurrentWeather(lat,lon) async{
+ var link1="https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$apiKey";
+  var res=await http.get(Uri.parse(link1));
   if(res.statusCode==200)
     {
       var data=postFromJson(res.body.toString());
@@ -14,7 +15,8 @@ getCurrentWeather() async{
       return data;
     }
 }
-getHourlyWeather() async{
+getHourlyWeather(lat,lon) async{
+  var link2="https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lon&appid=$apiKey";
   var res=await http.get(Uri.parse(link2));
   if(res.statusCode==200)
   {
